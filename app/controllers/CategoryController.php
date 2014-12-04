@@ -2,6 +2,12 @@
 
 class CategoryController extends \BaseController {
 
+
+    public function __construct() {
+        parent::__construct();
+        
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +15,9 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$categories = Category::all()->sortBy('name');
+
+        return View::make('category_index')->with('categories',$categories);
 	}
 
 
@@ -20,8 +28,8 @@ class CategoryController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
-	}
+        return View::make('category_create');
+    }
 
 
 	/**
@@ -31,8 +39,11 @@ class CategoryController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
-	}
+        $category = new Category();
+        $category->name = Input::get('name');
+        $category->save();
+        return Redirect::action('CategoryController@index');
+    }
 
 
 	/**

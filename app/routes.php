@@ -41,3 +41,5 @@ Route::get('mysql-test', function() {
     echo print_r($results);
 
 });
+
+Route::resource('category','CategoryController');
