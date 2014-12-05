@@ -28,7 +28,10 @@ class ItemController extends \BaseController {
      */
     public function create()
     {
-        return View::make('item_create');
+        $categories = Category::getIdNamePair();
+
+        return View::make('item_create')
+            ->with('categories',$categories);
     }
 
 
@@ -41,6 +44,11 @@ class ItemController extends \BaseController {
     {
         $item = new Item();
         $item->description = Input::get('description');
+        $item->category_id = Input::get('category_id');
+        $item->make = Input::get('make');
+        $item->model = Input::get('model');
+        $item->serial = Input::get('serial');
+        $item->notes = Input::get('notes');
         $item->save();
         return Redirect::action('ItemController@index')
             ->with('flash_message','Item ' . $item->description .' has been added.');
@@ -62,7 +70,9 @@ class ItemController extends \BaseController {
             return Redirect::to('/item')
                 ->with('flash_message', 'Item with id ' . $id . ' not found.');
         }
-        return View::make('item_show')->with('item', $item);
+
+        return View::make('item_show')
+            ->with('item', $item);
     }
 
 
@@ -81,7 +91,12 @@ class ItemController extends \BaseController {
             return Redirect::to('/item')
                 ->with('flash_message', 'Item with id ' . $id . ' not found.');
         }
-        return View::make('item_edit')->with('item', $item);
+
+        $categories = Category::getIdNamePair();
+
+        return View::make('item_edit')
+            ->with('item', $item)
+            ->with('categories',$categories);
 
     }
 
@@ -101,12 +116,17 @@ class ItemController extends \BaseController {
             return Redirect::to('/item')
                 ->with('flash_message', 'Item with id ' . $id . ' not found.');
         }
-        $olddesc = $item->description;
+
         $item->description = Input::get('description');
+        $item->category_id = Input::get('category_id');
+        $item->make = Input::get('make');
+        $item->model = Input::get('model');
+        $item->serial = Input::get('serial');
+        $item->notes = Input::get('notes');
         $item->save();
 
         return Redirect::action('ItemController@index')
-            ->with('flash_message','Item ' . $olddesc .' has been renamed to ' . $item->description . '.');
+            ->with('flash_message','Item ' . $item->description .' has been updated.');
     }
 
 

@@ -12,4 +12,16 @@ class Item extends Eloquent {
         return $this->belongsTo('Category');
     }
 
+    public function getCategoryName() {
+        try {
+            $category = Category::findOrFail($this->category_id);
+            $categoryname = $category->name;
+        }
+        catch (Exception $e) {
+            return "None";
+        }
+        return $categoryname;
+
+    }
+
 }
