@@ -24,4 +24,13 @@ class Item extends Eloquent {
 
     }
 
+    public static function getIdNamePair() {
+        $items = Array();
+        $collection = Item::all();
+        foreach($collection as $item) {
+            $items[$item->id] = $item->description;
+        }
+        return $items;
+    }
+
 }

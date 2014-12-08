@@ -49,9 +49,6 @@
 
         {{ Form::submit('Delete') }}
 
-
-       <!-- <a href='javascript:void(0)' onClick='parentNode.submit();return false;'>Delete Item</a> -->
-
     {{ Form::close() }}
 
 @stop

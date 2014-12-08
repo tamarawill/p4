@@ -10,9 +10,10 @@
 
 @foreach($items as $item)
     <div>
-        <a href="/item/{{ $item->id }}">{{ $item->description }}</a>
+            <a href="/item/{{ $item->id }}">{{ $item->description }}</a>
     </div>
 @endforeach
+
 <h1>Create a New Item</h1>
 <div><a href="/item/create">Create New Item</a></div>
 

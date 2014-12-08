@@ -45,3 +45,5 @@ Route::get('mysql-test', function() {
 Route::resource('category','CategoryController');
 
 Route::resource('item','ItemController');
+
+Route::resource('checkout','CheckoutController');

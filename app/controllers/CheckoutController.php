@@ -14,8 +14,11 @@ class CheckoutController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
-	}
+        $checkouts = Checkout::all()->sortBy('end_time');
+
+        return View::make('checkout_index')->with('checkouts',$checkouts);
+
+    }
 
 
 	/**
@@ -25,8 +28,13 @@ class CheckoutController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
-	}
+        $items = Item::getIdNamePair();
+
+        return View::make('checkout_create')
+            ->with('items',$items)
+            ->with('userid',1); //replace with actual value when auth implemented
+
+    }
 
 
 	/**
@@ -36,8 +44,15 @@ class CheckoutController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
-	}
+        $checkout = new Checkout();
+        $checkout->item_id = Input::get('item_id');
+        $checkout->user_id = Input::get('userid');
+        $checkout->start_time = date('Y-m-d H:i:s');
+        $checkout->end_time = Input::get('end_time');
+        $checkout->save();
+        return Redirect::action('CheckoutController@index')
+            ->with('flash_message','You have checked out ' . $checkout->getItemName() . '.');
+    }
 
 
 	/**
@@ -48,8 +63,17 @@ class CheckoutController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
-	}
+        try {
+            $checkout = Checkout::findOrFail($id);
+        }
+        catch(Exception $e) {
+            return Redirect::to('/checkout')
+                ->with('flash_message', 'Checkout with id ' . $id . ' not found.');
+        }
+
+        return View::make('checkout_show')
+            ->with('checkout', $checkout);
+    }
 
 
 	/**
@@ -60,8 +84,21 @@ class CheckoutController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
-	}
+        try {
+            $checkout = Checkout::findOrFail($id);
+        }
+        catch(Exception $e) {
+            return Redirect::to('/checkout')
+                ->with('flash_message', 'Checkout with id ' . $id . ' not found.');
+        }
+
+        $items = Item::getIdNamePair();
+
+        return View::make('checkout_edit')
+            ->with('checkout', $checkout)
+            ->with('items', $items);
+
+    }
 
 
 	/**
@@ -72,8 +109,22 @@ class CheckoutController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
-	}
+        try {
+            $checkout = Checkout::findOrFail($id);
+        }
+        catch(Exception $e) {
+            return Redirect::to('/checkout')
+                ->with('flash_message', 'Checkout with id ' . $id . ' not found.');
+        }
+
+        $checkout->end_time = Input::get('end_time');
+        $checkout->save();
+        return Redirect::action('CheckoutController@index')
+            ->with('flash_message','Checkout end date for ' . $checkout->getItemName()
+                . ' changed to ' . $checkout->end_time . '.');
+
+
+    }
 
 
 	/**
@@ -84,8 +135,20 @@ class CheckoutController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
-	}
+        try {
+            $checkout = Checkout::findOrFail($id);
+        }
+        catch(Exception $e) {
+            return Redirect::to('/checkout')
+                ->with('flash_message', 'Checkout with id ' . $id . ' not found.');
+        }
+
+        $itemname = $checkout->getItemName();
+        Checkout::destroy($id);
+
+        return Redirect::action('CheckoutController@index')
+            ->with('flash_message', $checkout->getItemName() . ' has been checked in.');
+    }
 
 
 }

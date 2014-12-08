@@ -1,0 +1,10 @@
+/* Generic style for listing things in a table */
+table.listingtable {
+    border-collapse: collapse;
+}
+
+table.listingtable,
+table.listingtable th,
+table.listingtable td {
+    border: 1px solid #333;
+}

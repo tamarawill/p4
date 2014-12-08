@@ -5,6 +5,7 @@
 
     <title>@yield('title','SharedStuffTracker')</title>
     <meta charset='utf-8'>
+    <link rel="stylesheet" href="styles.css" type="text/css">
 
     @yield('head')
 

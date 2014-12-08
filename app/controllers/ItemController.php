@@ -152,7 +152,6 @@ class ItemController extends \BaseController {
         return Redirect::action('ItemController@index')
             ->with('flash_message','Item ' . $desc .' has been deleted.');
 
-
     }
 
 
