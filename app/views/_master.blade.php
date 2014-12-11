@@ -17,13 +17,26 @@
         <div class='flash-message'>{{ Session::get('flash_message') }}</div>
     @endif
 
-    <p>Current user:
         @if( Auth::check())
-            {{ Auth::user()->email }}
+
+            <p><a href="/">Home</a>
+            |
+            <a href="/checkout">View Checkouts</a>
+            |
+            <a href="/item">View Items</a>
+            |
+            <a href="/category">View Categories</a>
+            |
+            <a href="/logout">Log Out</a>
+            |
+            Logged in: {{ Auth::user()->email }}</p>
+
         @else
-            None
+
+            <p><a href="/">Home</a> | <a href="/login">Log In</a></p>
+
         @endif
-    </p>
+
 
     @yield('content')
 

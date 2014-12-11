@@ -10,14 +10,11 @@
 
     @if( Auth::check())
 
-        <p><a href="/checkout">View Checkouts</a></p>
-        <p><a href="/item">View Items</a></p>
-        <p><a href="/category">View Categories</a></p>
-        <p><a href="/logout">Log Out</a></p>
+        <p>You are logged in! Welcome!</p>
 
     @else
 
-        <p><a href="/login">Log In</a></p>
+        <p>To view the awesome stuff herein, you must <a href="/login">log in</a>.</p>
 
     @endif
 

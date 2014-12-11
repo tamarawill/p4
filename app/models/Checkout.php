@@ -35,6 +35,9 @@ class Checkout extends Eloquent {
         return $username;
     }
 
-
+    public static function conflict($start, $end, $itemid){
+        //returns conflicting Checkout
+        //or returns 0 or null if none
+    }
 
 }
