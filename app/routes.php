@@ -51,6 +51,9 @@ Route::resource('checkout','CheckoutController');
 Route::get('/login', 'UserController@getLogin' );
 Route::post('/login', 'UserController@postLogin' );
 Route::get('/logout', 'UserController@getLogout' );
+Route::get('/signup', 'UserController@getSignup' );
+Route::post('/signup', 'UserController@postSignup' );
+
 
 Route::get('/settestuser', function(){
 
