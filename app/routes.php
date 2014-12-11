@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('homepage');
 });
 
 Route::get('/get-environment',function() {
@@ -47,3 +47,14 @@ Route::resource('category','CategoryController');
 Route::resource('item','ItemController');
 
 Route::resource('checkout','CheckoutController');
+
+Route::get('/login', 'UserController@getLogin' );
+Route::post('/login', 'UserController@postLogin' );
+Route::get('/logout', 'UserController@getLogout' );
+
+Route::get('/settestuser', function(){
+
+    $pw = Hash::make('foobar');
+    DB::update('update users set password = ? where email = ?', array( $pw, 'rhymes.with.camera@gmail.com'));
+
+});

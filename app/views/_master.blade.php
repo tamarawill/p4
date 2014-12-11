@@ -17,6 +17,14 @@
         <div class='flash-message'>{{ Session::get('flash_message') }}</div>
     @endif
 
+    <p>Current user:
+        @if( Auth::check())
+            {{ Auth::user()->email }}
+        @else
+            None
+        @endif
+    </p>
+
     @yield('content')
 
 </body>
