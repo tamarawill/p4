@@ -33,7 +33,7 @@ class CheckoutController extends \BaseController {
 
         return View::make('checkout_create')
             ->with('items',$items)
-            ->with('userid',1); //replace with actual value when auth implemented
+            ->with('userid', Auth::id() ); //replace with actual value when auth implemented
 
     }
 
@@ -45,10 +45,31 @@ class CheckoutController extends \BaseController {
 	 */
 	public function store()
 	{
+        $starttime = date('Y-m-d H:i:s');
+
+        $rules = array(
+            'end_time' => 'required|date|after:'.$starttime,
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/checkout/create')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
+        if (Checkout::conflict($starttime, Input::get('end_time'), Input::get('item_id')))
+            return Redirect::to('/checkout/create')
+                ->withInput()
+                ->with('flash_message', 'There is a conflicting checkout for this item.');
+
+
         $checkout = new Checkout();
         $checkout->item_id = Input::get('item_id');
         $checkout->user_id = Input::get('userid');
-        $checkout->start_time = date('Y-m-d H:i:s');
+        $checkout->start_time = $starttime;
         $checkout->end_time = Input::get('end_time');
         $checkout->save();
         return Redirect::action('CheckoutController@index')

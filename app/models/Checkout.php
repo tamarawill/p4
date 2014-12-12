@@ -38,6 +38,28 @@ class Checkout extends Eloquent {
     public static function conflict($start, $end, $itemid){
         //returns conflicting Checkout
         //or returns 0 or null if none
+
+        //get array of checkouts matching $itemid
+        $checkouts = Checkout::where('item_id' == $itemid);
+
+        //loop through array and determine if conflict
+        //if there is a conflict, return true
+        foreach ($checkouts as $checkout) {
+            if( $checkout->start_date < $start
+                && $checkout->end_date > $start ) {
+                return true;
+            }
+            if ($checkout->start_date > $start
+                && $checkout->start_date < $end ) {
+                return true;
+            }
+
+            return false;
+        }
+
+
+
+        //at end of loop, if no conflict found, return false
     }
 
 }

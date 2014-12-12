@@ -8,6 +8,11 @@ Check out an item
 
     <h1>Check Out an Item:</h1>
 
+    @foreach($errors->all() as $message)
+        <div class='error'>{{ $message }}</div>
+    @endforeach
+
+
     {{ Form::open(array('action' => 'CheckoutController@store')) }}
 
      <div class='form-group'>
