@@ -48,11 +48,15 @@ Route::resource('item','ItemController');
 
 Route::resource('checkout','CheckoutController');
 
+//Non-RESTful user routes:
+
 Route::get('/login', 'UserController@getLogin' );
 Route::post('/login', 'UserController@postLogin' );
 Route::get('/logout', 'UserController@getLogout' );
-Route::get('/signup', 'UserController@getSignup' );
-Route::post('/signup', 'UserController@postSignup' );
+Route::get('/signup', 'UserController@create' );
+Route::post('/signup', 'UserController@store' );
+
+Route::resource('user', 'UserController');
 
 
 Route::get('/settestuser', function(){

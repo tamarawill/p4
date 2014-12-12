@@ -1,33 +1,23 @@
 @extends('_master')
 
 @section('title')
-    Create an Account
+    Edit User
 @stop
 
 @section('content')
 
-	<h1>Create an Account</h1>
+	<h1>Edit User</h1>
 
 	@foreach($errors->all() as $message)
         <div class='error'>{{ $message }}</div>
     @endforeach
 
-    {{ Form::open(array('action' => 'UserController@store')) }}
+    {{ Form::model($user, ['method' => 'put', 'action' => ['UserController@update', $user->id]]) }}
 
      <div class='form-group'>
         {{ Form::label('email','Email') }}
         {{ Form::text('email') }}
      </div>
-
-    <div class='form-group'>
-     	{{ Form::label('password', 'Password') }}
-        {{ Form::password('password') }}
-    </div>
-
-    <div class='form-group'>
-        {{ Form::label('password2', 'Re-enter Password') }}
-        {{ Form::password('password2') }}
-    </div>
 
      <div class='form-group'>
         {{ Form::label('first_name','First Name') }}
@@ -39,9 +29,21 @@
         {{ Form::text('last_name') }}
      </div>
 
+     <div class='form-group'>
+        {{ Form::label('is_admin','Admin') }}
+        {{ Form::select('is_admin', array(0 => 'No', 1 => 'Yes')) }}
+     </div>
+
     <br>
 
-    {{ Form::submit('Create Account') }}
+    {{ Form::submit('Edit User') }}
     {{ Form::close() }}
+
+    {{ Form::open(['method' => 'DELETE', 'action' => ['UserController@destroy', $user->id]]) }}
+
+        {{ Form::submit('Delete User') }}
+
+    {{ Form::close() }}
+
 
 @stop

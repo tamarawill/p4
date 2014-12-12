@@ -27,13 +27,20 @@
             |
             <a href="/category">View Categories</a>
             |
+            <a href="/user">View Users</a>
+            |
             <a href="/logout">Log Out</a>
             |
             Logged in: {{ Auth::user()->email }}</p>
 
         @else
 
-            <p><a href="/">Home</a> | <a href="/login">Log In</a></p>
+            <p><a href="/">Home</a>
+            |
+            <a href="/login">Log In</a>
+            |
+            <a href="/signup">Sign Up</a>
+            </p>
 
         @endif
 
