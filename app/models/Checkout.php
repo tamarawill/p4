@@ -39,22 +39,36 @@ class Checkout extends Eloquent {
         //returns conflicting Checkout
         //or returns 0 or null if none
 
+        print_r('Checkout start date to test: ' . $start);
+        print_r('Checkout end date to test: ' . $end);
+        print_r('Checkout item id to test: ' . $itemid);
+
+
+
         //get array of checkouts matching $itemid
         $checkouts = Checkout::where('item_id' == $itemid);
 
         //loop through array and determine if conflict
         //if there is a conflict, return true
         foreach ($checkouts as $checkout) {
+            print_r('Testing a checkout on item ' . $checkout->item_id
+                . 'with start date ' . $checkout->start_date
+                . 'and end date' . $checkout->end_date);
+
             if( $checkout->start_date < $start
                 && $checkout->end_date > $start ) {
-                return true;
+                //return true;
+                print_r('Conflict on first if');
             }
             if ($checkout->start_date > $start
                 && $checkout->start_date < $end ) {
-                return true;
+                //return true;
+                print_r('Conflict on second if');
+
             }
 
-            return false;
+            //return false;
+            print_r('No conflict.');
         }
 
 

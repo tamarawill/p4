@@ -65,3 +65,9 @@ Route::get('/settestuser', function(){
     DB::update('update users set password = ? where email = ?', array( $pw, 'rhymes.with.camera@gmail.com'));
 
 });
+
+Route::get('/test-conflict', function(){
+
+    Checkout::conflict('2014-12-01 12:00:00','2014-12-20 12:00:00',1);
+
+});
