@@ -16,7 +16,7 @@ class CreateItemsTable extends Migration {
 
             $table->increments('id');
 
-            $table->string('description');
+            $table->string('description')->unique();
             $table->string('make');
             $table->string('model');
             $table->string('serial')->unique();

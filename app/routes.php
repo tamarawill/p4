@@ -68,6 +68,6 @@ Route::get('/settestuser', function(){
 
 Route::get('/test-conflict', function(){
 
-    Checkout::conflict('2014-12-01 12:00:00','2014-12-20 12:00:00',1);
+    Checkout::conflict('2014-12-13 21:43:24','2014-12-20 18:01:00',1);
 
 });
