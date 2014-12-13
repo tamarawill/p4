@@ -160,7 +160,6 @@ class UserController extends BaseController {
         }
 
         $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
         $user->first_name = Input::get('first_name');
         $user->last_name = Input::get('last_name');
         $user->is_admin = Input::get('is_admin');
