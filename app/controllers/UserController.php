@@ -58,9 +58,14 @@ class UserController extends BaseController {
         $user->last_name = Input::get('last_name');
         $user->is_admin = 0;
         $user->save();
-        Auth::login($user);
-        return Redirect::to('/')
-            ->with('flash_message','Welcome ' . $user->first_name . '!');
+        if (Auth::check()) {
+            return Redirect::action('UserController@index')
+                ->with('flash_message','User ' . $user->first_name . ' ' . $user->last_name . ' has been added.');
+        } else {
+            Auth::login($user);
+            return Redirect::to('/')
+                ->with('flash_message', 'Welcome ' . $user->first_name . '!');
+        }
     }
 
 
