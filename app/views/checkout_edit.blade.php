@@ -8,6 +8,10 @@ Edit Checkout
 
     <h1>Change Checkout End Date:</h1>
 
+        @foreach($errors->all() as $message)
+            <div class='error'>{{ $message }}</div>
+        @endforeach
+
     {{ Form::model($checkout, ['method' => 'put', 'action' => ['CheckoutController@update', $checkout->id]]) }}
 
     <div class='form-group'>

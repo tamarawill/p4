@@ -8,6 +8,10 @@ Create a new category
 
     <h1>Create a Category</h1>
 
+    @foreach($errors->all() as $message)
+        <div class='error'>{{ $message }}</div>
+    @endforeach
+
     {{ Form::open(array('action' => 'CategoryController@store')) }}
 
     <div>

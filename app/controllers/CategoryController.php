@@ -40,6 +40,19 @@ class CategoryController extends \BaseController {
 	 */
 	public function store()
 	{
+        $rules = array(
+            'name' => 'required|unique:categories,name',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/category/create')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
         $category = new Category();
         $category->name = Input::get('name');
         $category->save();
@@ -102,6 +115,20 @@ class CategoryController extends \BaseController {
             return Redirect::to('/category')
                 ->with('flash_message', 'Category with id ' . $id . ' not found.');
         }
+
+        $rules = array(
+            'name' => 'required|unique:categories,name,'.$id,
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/category/'.$id.'/edit/')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
         $oldname = $category->name;
         $category->name = Input::get('name');
         $category->save();

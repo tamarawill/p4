@@ -139,6 +139,24 @@ class CheckoutController extends \BaseController {
                 ->with('flash_message', 'Checkout with id ' . $id . ' not found.');
         }
 
+        $rules = array(
+            'end_time' => 'required|date|after:'.$checkout->start_time,
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/checkout/'.$id.'/edit/')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
+        if (Checkout::conflict($checkout->start_time, Input::get('end_time'), Input::get('item_id')))
+            return Redirect::to('/checkout/'.$id.'/edit/')
+                ->withInput()
+                ->with('flash_message', 'There is a conflicting checkout for this item.');
+
         $checkout->end_time = Input::get('end_time');
         $checkout->save();
         return Redirect::action('CheckoutController@index')

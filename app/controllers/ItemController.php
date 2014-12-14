@@ -44,6 +44,23 @@ class ItemController extends \BaseController {
      */
     public function store()
     {
+        $rules = array(
+            'description' => 'required|unique:items,description',
+            'category_id' => 'required|integer|min:1',
+            'make' => 'required',
+            'model' => 'required',
+            'serial' => 'required|unique:items,serial',
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/item/create')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
         $item = new Item();
         $item->description = Input::get('description');
         $item->category_id = Input::get('category_id');
@@ -118,6 +135,24 @@ class ItemController extends \BaseController {
             return Redirect::to('/item')
                 ->with('flash_message', 'Item with id ' . $id . ' not found.');
         }
+
+        $rules = array(
+            'description' => 'required|unique:items,description,'.$id,
+            'category_id' => 'required|integer|min:1',
+            'make' => 'required',
+            'model' => 'required',
+            'serial' => 'required|unique:items,serial,'.$id,
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/item/'.$id.'/edit/')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
 
         $item->description = Input::get('description');
         $item->category_id = Input::get('category_id');

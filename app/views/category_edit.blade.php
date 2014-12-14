@@ -6,6 +6,10 @@
 
 @section('content')
 
+    @foreach($errors->all() as $message)
+        <div class='error'>{{ $message }}</div>
+    @endforeach
+
     {{ Form::model($category, ['method' => 'put', 'action' => ['CategoryController@update', $category->id]]) }}
 
         <h2>Update: {{ $category->name }}</h2>
