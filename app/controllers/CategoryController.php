@@ -154,6 +154,12 @@ class CategoryController extends \BaseController {
                 ->with('flash_message', 'Category with id ' . $id . ' not found.');
         }
 
+        if($category->hasItems()){
+            return Redirect::to('/category/'.$id.'/edit')
+                ->with('flash_message', 'The category with id ' . $category->name
+                    . ' is being used by at least one item and cannot be deleted.');
+        }
+
         $catname = $category->name;
         Category::destroy($id);
 
