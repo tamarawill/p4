@@ -66,3 +66,10 @@ Route::get('/settestuser', function(){
 
 });
 
+Route::filter('admin', function()
+{
+    if ( ! Auth::user()->is_admin )
+        return Redirect::to('/')
+            ->with('flash_message','Sorry, you must be an admin to access that page.');
+});
+

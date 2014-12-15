@@ -8,6 +8,8 @@ class ItemController extends \BaseController {
 
         $this->beforeFilter('auth');
 
+        $this->beforeFilter('admin', array('except' => array('index','show')));
+
     }
 
     /**

@@ -31,7 +31,11 @@
             |
             <a href="/logout">Log Out</a>
             |
-            Logged in: {{ Auth::user()->email }}</p>
+            Logged in: {{ Auth::user()->email }}
+            @if ( Auth::user()->is_admin )
+                - Admin
+            @endif
+            </p>
 
         @else
 

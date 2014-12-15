@@ -12,6 +12,8 @@ Edit Checkout
             <div class='error'>{{ $message }}</div>
         @endforeach
 
+    @if( Auth::user()->is_admin || Auth::user()->id == $checkout->user_id )
+
     {{ Form::model($checkout, ['method' => 'put', 'action' => ['CheckoutController@update', $checkout->id]]) }}
 
     <div class='form-group'>
@@ -29,6 +31,14 @@ Edit Checkout
         {{ Form::submit('Check Item In') }}
 
     {{ Form::close() }}
+
+    @else
+
+    <p>You are not authorized to edit this checkout.</p>
+
+    <p><a href="/checkout">Back to Checkouts List</a></p>
+
+    @endif
 
 
 @stop

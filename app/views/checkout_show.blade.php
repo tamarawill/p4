@@ -14,6 +14,8 @@
         <li>To be returned by: {{ $checkout->end_time }}</li>
 	</ul>
 
-	<a href="/checkout/{{ $checkout->id }}/edit">Edit</a>
+	@if( Auth::user()->is_admin || Auth::user()->id == $checkout->user_id )
+	    <a href="/checkout/{{ $checkout->id }}/edit">Edit</a>
+	@endif
 
 @stop

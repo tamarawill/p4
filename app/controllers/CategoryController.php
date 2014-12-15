@@ -7,6 +7,8 @@ class CategoryController extends \BaseController {
         parent::__construct();
 
         $this->beforeFilter('auth');
+
+        $this->beforeFilter('admin', array('except' => array('index','show')));
     }
 
 	/**
