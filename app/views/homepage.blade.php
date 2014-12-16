@@ -10,11 +10,9 @@
 
     @if( Auth::check())
 
-        <p>You are logged in! Welcome!</p>
-
         <h2>Your Checkouts:</h2>
 
-        <table class="listingtable">
+        <table class="table">
             <tr>
                 <th>
                     Item

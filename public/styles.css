@@ -8,3 +8,8 @@ table.listingtable th,
 table.listingtable td {
     border: 1px solid #333;
 }
+
+body {
+    padding-top: 65px;
+}
+

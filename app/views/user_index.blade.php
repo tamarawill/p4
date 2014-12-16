@@ -8,7 +8,7 @@
 
 <h1>All Users</h1>
 
-<table class="listingtable">
+<table class="table">
     <tr>
         <th>
             Email

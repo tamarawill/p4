@@ -8,7 +8,7 @@
 
 <h1>Items Currently Checked Out</h1>
 
-<table class="listingtable">
+<table class="table">
     <tr>
         <th>
             Item
