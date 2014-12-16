@@ -7,6 +7,9 @@ class UserController extends BaseController {
 
         parent::__construct();
 
+        $this->beforeFilter('admin',
+            array('except' => array('getLogin','postLogin','getLogout','getSignup','postSignup')));
+
     }
 
     public function getLogin() {
@@ -32,7 +35,13 @@ class UserController extends BaseController {
         return Redirect::to('/');
     }
 
-    public function store() {
+    public function getSignup()
+    {
+        return View::make('user_signupform');
+    }
+
+
+    public function postSignup() {
 
         $rules = array(
             'email' => 'required|email|unique:users,email',
@@ -58,14 +67,10 @@ class UserController extends BaseController {
         $user->last_name = Input::get('last_name');
         $user->is_admin = 0;
         $user->save();
-        if (Auth::check()) {
-            return Redirect::action('UserController@index')
-                ->with('flash_message','User ' . $user->first_name . ' ' . $user->last_name . ' has been added.');
-        } else {
-            Auth::login($user);
-            return Redirect::to('/')
-                ->with('flash_message', 'Welcome ' . $user->first_name . '!');
-        }
+
+        Auth::login($user);
+        return Redirect::to('/')
+            ->with('flash_message', 'Welcome ' . $user->first_name . '!');
     }
 
 
@@ -89,9 +94,47 @@ class UserController extends BaseController {
      */
     public function create()
     {
-        return View::make('user_signupform');
+        return View::make('user_create');
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+
+    public function store() {
+
+        $rules = array(
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'password2' => 'required|same:password',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'is_admin' => 'required|boolean'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('/user/create')
+                ->withInput()
+                ->with('flash_message', 'Please fix errors and try again.')
+                ->withErrors($validator);
+        }
+
+        $user = new User();
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $user->is_admin = Input::get('is_admin');
+        $user->save();
+
+        return Redirect::action('UserController@index')
+            ->with('flash_message','User ' . $user->first_name . ' ' . $user->last_name . ' has been added.');
+    }
 
 
     /**

@@ -53,8 +53,8 @@ Route::resource('checkout','CheckoutController');
 Route::get('/login', 'UserController@getLogin' );
 Route::post('/login', 'UserController@postLogin' );
 Route::get('/logout', 'UserController@getLogout' );
-Route::get('/signup', 'UserController@create' );
-Route::post('/signup', 'UserController@store' );
+Route::get('/signup', 'UserController@getSignup' );
+Route::post('/signup', 'UserController@postSignup' );
 
 Route::resource('user', 'UserController');
 
