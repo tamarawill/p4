@@ -234,6 +234,11 @@ class UserController extends BaseController {
                 ->with('flash_message', 'User with id ' . $id . ' not found.');
         }
 
+        if($user->hasCheckouts()){
+            return Redirect::to('/user/'.$id.'/edit')
+                ->with('flash_message', 'User has at least one active checkout and cannot be deleted.');
+        }
+
         $useremail = $user->email;
         User::destroy($id);
 

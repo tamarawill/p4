@@ -28,5 +28,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Checkout');
     }
 
+    /**
+     * Returns true if any items are associated with the category.
+     */
+
+    public function hasCheckouts(){
+
+        $checkouts = Checkout::where('user_id', '=', $this->id)->count();
+
+        if ($checkouts == 0){
+            return false;
+        }
+
+        return true;
+    }
 
 }

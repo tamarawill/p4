@@ -159,7 +159,7 @@ class CategoryController extends \BaseController {
         if($category->hasItems()){
             return Redirect::to('/category/'.$id.'/edit')
                 ->with('flash_message', 'The category ' . $category->name
-                    . ' is being used by at least one item and cannot be deleted.');
+                    . ' is assigned to at least one item and cannot be deleted.');
         }
 
         $catname = $category->name;

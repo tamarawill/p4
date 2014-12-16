@@ -1,19 +1,43 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
 
-Route::get('/', function()
+Route::get('/', 'HomeController@getHomePage');
+
+
+Route::resource('category','CategoryController');
+
+Route::resource('item','ItemController');
+
+Route::resource('checkout','CheckoutController');
+
+//Non-RESTful user routes:
+
+Route::get('/login', 'UserController@getLogin' );
+Route::post('/login', 'UserController@postLogin' );
+Route::get('/logout', 'UserController@getLogout' );
+Route::get('/signup', 'UserController@getSignup' );
+Route::post('/signup', 'UserController@postSignup' );
+
+Route::resource('user', 'UserController');
+
+
+Route::filter('admin', function()
 {
-	return View::make('homepage');
+    if ( ! Auth::user()->is_admin )
+        return Redirect::to('/')
+            ->with('flash_message','Sorry, you must be an admin to access that page.');
+});
+
+
+/**
+ * Testing Routes:
+ */
+
+Route::get('/settestuser', function(){
+
+    $pw = Hash::make('foobar');
+    DB::update('update users set password = ? where email = ?', array( $pw, 'rhymes.with.camera@gmail.com'));
+
 });
 
 Route::get('/get-environment',function() {
@@ -41,35 +65,3 @@ Route::get('mysql-test', function() {
     echo print_r($results);
 
 });
-
-Route::resource('category','CategoryController');
-
-Route::resource('item','ItemController');
-
-Route::resource('checkout','CheckoutController');
-
-//Non-RESTful user routes:
-
-Route::get('/login', 'UserController@getLogin' );
-Route::post('/login', 'UserController@postLogin' );
-Route::get('/logout', 'UserController@getLogout' );
-Route::get('/signup', 'UserController@getSignup' );
-Route::post('/signup', 'UserController@postSignup' );
-
-Route::resource('user', 'UserController');
-
-
-Route::get('/settestuser', function(){
-
-    $pw = Hash::make('foobar');
-    DB::update('update users set password = ? where email = ?', array( $pw, 'rhymes.with.camera@gmail.com'));
-
-});
-
-Route::filter('admin', function()
-{
-    if ( ! Auth::user()->is_admin )
-        return Redirect::to('/')
-            ->with('flash_message','Sorry, you must be an admin to access that page.');
-});
-

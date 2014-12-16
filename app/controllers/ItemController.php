@@ -185,6 +185,11 @@ class ItemController extends \BaseController {
                 ->with('flash_message', 'Item with id ' . $id . ' not found.');
         }
 
+        if($item->hasCheckouts()){
+            return Redirect::to('/item/'.$id.'/edit')
+                ->with('flash_message', 'Item is currently checked out and cannot be deleted.');
+        }
+
         $desc = $item->description;
         Item::destroy($id);
 
