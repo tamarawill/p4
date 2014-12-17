@@ -6,7 +6,7 @@
 
 @section('content')
 
-	<h1>Welcome to the SharedStuff Application!</h1>
+	<h1>SharedStuff Home</h1>
 
     @if( Auth::check())
 
@@ -34,10 +34,10 @@
                     <a href="/item/{{ $checkout->item_id }}">{{ $checkout->getItemName() }}</a>
                 </td>
                 <td>
-                    {{ $checkout->start_time }}
+                    {{ Checkout::shortDate( $checkout->start_time) }}
                 </td>
                 <td>
-                    {{ $checkout->end_time }}
+                    {{ Checkout::shortDate( $checkout->end_time) }}
                 </td>
                 <td>
                     <a href="/checkout/{{ $checkout->id }}">View Details</a>

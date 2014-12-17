@@ -60,4 +60,10 @@ class Checkout extends Eloquent {
 
     }
 
+    public static function shortDate($date_string) {
+
+        return date_format(DateTime::createFromFormat('Y-m-d H:i:s', $date_string), 'M j g:i a');
+    }
+
+
 }

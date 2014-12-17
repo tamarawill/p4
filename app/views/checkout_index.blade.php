@@ -33,10 +33,10 @@
             <a href="/item/{{ $checkout->item_id }}">{{ $checkout->getItemName() }}</a>
         </td>
         <td>
-            {{ $checkout->start_time }}
+            {{ Checkout::shortDate( $checkout->start_time ) }}
         </td>
         <td>
-            {{ $checkout->end_time }}
+            {{ Checkout::shortDate( $checkout->end_time ) }}
         </td>
         <td>
             <a href="/user/{{ $checkout->user_id }}">{{ $checkout->getUserName() }}</a>
