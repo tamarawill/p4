@@ -12,7 +12,7 @@
 
         <h2>Your Checkouts:</h2>
 
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th>
                     Item
@@ -40,7 +40,7 @@
                     {{ Checkout::shortDate( $checkout->end_time) }}
                 </td>
                 <td>
-                    <a href="/checkout/{{ $checkout->id }}">View Details</a>
+                    <a href="/checkout/{{ $checkout->id }}" class="btn btn-default btn-sm">View Details</a>
                 </td>
             </tr>
         @endforeach

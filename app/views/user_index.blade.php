@@ -8,7 +8,9 @@
 
 <h1>All Users</h1>
 
-<table class="table">
+<p><a href="/user/create" class="btn btn-primary">Create New User</a></p>
+
+<table class="table table-striped">
     <tr>
         <th>
             Email
@@ -45,10 +47,6 @@
     </tr>
 @endforeach
 </table>
-
-
-<h1>Create a User</h1>
-<div><a href="/user/create">Create a User</a></div>
 
 @stop
 

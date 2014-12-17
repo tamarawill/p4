@@ -8,7 +8,9 @@
 
 <h1>Items Currently Checked Out</h1>
 
-<table class="table">
+<p><a href="/checkout/create" class="btn btn-primary">Check Out an Item</a></p>
+
+<table class="table table-striped">
     <tr>
         <th>
             Item
@@ -42,15 +44,11 @@
             <a href="/user/{{ $checkout->user_id }}">{{ $checkout->getUserName() }}</a>
         </td>
         <td>
-            <a href="/checkout/{{ $checkout->id }}">View Details</a>
+            <a href="/checkout/{{ $checkout->id }}" class="btn btn-default btn-sm">View Details</a>
         </td>
     </tr>
 @endforeach
 </table>
-
-
-<h1>Check Out an Item</h1>
-<div><a href="/checkout/create">Check Out an Item</a></div>
 
 @stop
 

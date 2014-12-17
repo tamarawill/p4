@@ -15,7 +15,7 @@
 	</ul>
 
 	@if( Auth::user()->is_admin || Auth::user()->id == $checkout->user_id )
-	    <a href="/checkout/{{ $checkout->id }}/edit">Edit</a>
+	    <p><a href="/checkout/{{ $checkout->id }}/edit" class="btn btn-primary">Edit Checkout</a></p>
 	@endif
 
 @stop

@@ -20,6 +20,6 @@
         </li>
 	</ul>
 
-	<a href="/user/{{ $user->id }}/edit">Edit</a>
+	<p><a href="/user/{{ $user->id }}/edit"  class="btn btn-primary">Edit User</a></p>
 
 @stop

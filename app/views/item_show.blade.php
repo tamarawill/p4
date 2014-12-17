@@ -16,6 +16,8 @@
         <li>Notes: {{ $item->notes }}</li>
 	</ul>
 
-	<a href="/item/{{ $item->id }}/edit">Edit</a>
+    @if( Auth::user()->is_admin )
+        <p><a href="/item/{{ $item->id }}/edit" class="btn btn-primary">Edit Item</a></p>
+    @endif
 
 @stop

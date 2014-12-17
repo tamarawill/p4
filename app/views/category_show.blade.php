@@ -7,6 +7,9 @@
 @section('content')
 
 	<h1>Category: {{ $category->name }}</h1>
-	<a href="/category/{{ $category->id }}/edit">Edit</a>
+
+		@if( Auth::user()->is_admin )
+	        <p><a href="/category/{{ $category->id }}/edit" class="btn btn-primary">Edit Category</a></p>
+    	@endif
 
 @stop
