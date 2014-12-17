@@ -12,13 +12,24 @@ Edit Checkout
             <div class='error'>{{ $message }}</div>
         @endforeach
 
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-6">
+
+
     @if( Auth::user()->is_admin || Auth::user()->id == $checkout->user_id )
 
     {{ Form::model($checkout, ['method' => 'put', 'action' => ['CheckoutController@update', $checkout->id]]) }}
 
-    <div class='form-group'>
-     	{{ Form::label('end_time', 'I will return the item at:') }}
-        {{ Form::text('end_time') }}
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control"
+                data-date-format="YYYY-MM-DD HH:mm:ss"
+                value="{{ $checkout->end_time }}" name="end_time" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
     </div>
 
     <br>
@@ -32,6 +43,10 @@ Edit Checkout
 
     {{ Form::close() }}
 
+    </div><!--end col-md-6-->
+    </div><!--end row-->
+    </div> <!--end container-fluid-->
+
     @else
 
     <p>You are not authorized to edit this checkout.</p>
@@ -40,5 +55,21 @@ Edit Checkout
 
     @endif
 
+@stop
+
+@section('scripts')
+
+    <!-- Date-time picker Javascript -->
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+	<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                	useSeconds: false,
+                	minuteStepping: 15,
+                	defaultTime: moment("{{ $checkout->end_time }}")
+                });
+            });
+    </script>
 
 @stop

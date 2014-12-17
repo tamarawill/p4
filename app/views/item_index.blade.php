@@ -10,11 +10,13 @@
 
 <p><a href="/item/create" class="btn btn-primary">Create New Item</a></p>
 
-@foreach($items as $item)
-    <div>
+    <table class="table table-striped">
+        @foreach($items as $item)
+            <tr><td>
             <a href="/item/{{ $item->id }}">{{ $item->description }}</a>
-    </div>
-@endforeach
+            </td></tr>
+        @endforeach
+    </table>
 
 @stop
 

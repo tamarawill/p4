@@ -65,14 +65,13 @@ class CheckoutController extends \BaseController {
                 ->withInput()
                 ->with('flash_message', 'There is a conflicting checkout for this item.');
 
-
         $checkout = new Checkout();
         $checkout->item_id = Input::get('item_id');
         $checkout->user_id = Input::get('userid');
         $checkout->start_time = $starttime;
         $checkout->end_time = Input::get('end_time');
         $checkout->save();
-        return Redirect::action('CheckoutController@index')
+        return Redirect::to('/')
             ->with('flash_message','You have checked out ' . $checkout->getItemName() . '.');
     }
 
@@ -152,7 +151,7 @@ class CheckoutController extends \BaseController {
                 ->withErrors($validator);
         }
 
-        if (Checkout::conflict($checkout->start_time, Input::get('end_time'), Input::get('item_id')))
+        if (Checkout::conflict($checkout->start_time, Input::get('end_time'), $checkout->item_id))
             return Redirect::to('/checkout/'.$id.'/edit/')
                 ->withInput()
                 ->with('flash_message', 'There is a conflicting checkout for this item.');
@@ -186,7 +185,7 @@ class CheckoutController extends \BaseController {
         $itemname = $checkout->getItemName();
         Checkout::destroy($id);
 
-        return Redirect::action('CheckoutController@index')
+        return Redirect::to('/')
             ->with('flash_message', $checkout->getItemName() . ' has been checked in.');
     }
 

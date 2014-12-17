@@ -14,7 +14,10 @@
     <!-- Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <!-- Date-time picker css -->
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
 
     @yield('head')
 
@@ -92,6 +95,9 @@
 
     <!-- JQuery Javascript -->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Moment.js Javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

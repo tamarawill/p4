@@ -10,11 +10,13 @@
 
 <p><a href="/category/create" class="btn btn-primary">Create New Category</a></p>
 
-@foreach($categories as $category)
-    <div>
-        <a href="/category/{{ $category->id }}">{{ $category->name }}</a>
-    </div>
-@endforeach
+    <table class="table table-striped">
+
+        @foreach($categories as $category)
+            <tr><td>
+                <a href="/category/{{ $category->id }}">{{ $category->name }}</a>
+            </td></tr>
+        @endforeach
+    </table>
 
 @stop
-

@@ -12,6 +12,9 @@ Check out an item
         <div class='error'>{{ $message }}</div>
     @endforeach
 
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-6">
 
     {{ Form::open(array('action' => 'CheckoutController@store')) }}
 
@@ -20,10 +23,16 @@ Check out an item
         {{ Form::select('item_id', $items) }}
      </div>
 
-    <div class='form-group'>
-     	{{ Form::label('end_time', 'I will return the item at:') }}
-        {{ Form::text('end_time', 'YYYY-MM-DD HH:MM:SS') }}
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control"
+                data-date-format="YYYY-MM-DD HH:mm:ss" name="end_time" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
     </div>
+
 
     <br>
 
@@ -31,4 +40,25 @@ Check out an item
 
     {{ Form::submit('Check It Out!') }}
     {{ Form::close() }}
+
+    </div><!--end col-md-6-->
+    </div><!--end row-->
+    </div> <!--end container-fluid-->
+@stop
+
+@section('scripts')
+
+    <!-- Date-time picker Javascript -->
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
+	<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                	useSeconds: false,
+                	minuteStepping: 15,
+                	useCurrent: true
+                });
+            });
+    </script>
+
 @stop

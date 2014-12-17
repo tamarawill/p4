@@ -12,6 +12,8 @@
 
         <h2>Your Checkouts:</h2>
 
+        <p><a href="/checkout/create" class="btn btn-primary">Check Out an Item</a></p>
+
         <table class="table table-striped">
             <tr>
                 <th>
@@ -25,6 +27,9 @@
                 </th>
                 <th>
                     Checkout Details
+                </th>
+                <th>
+                    Check In
                 </th>
             </tr>
 
@@ -40,7 +45,13 @@
                     {{ Checkout::shortDate( $checkout->end_time) }}
                 </td>
                 <td>
-                    <a href="/checkout/{{ $checkout->id }}" class="btn btn-default btn-sm">View Details</a>
+                        <a href="/checkout/{{ $checkout->id }}" class="btn btn-default btn-sm">View Details</a>
+
+                </td>
+                <td>
+                        {{ Form::open(['method' => 'DELETE', 'action' => ['CheckoutController@destroy', $checkout->id]]) }}
+                        <input type="submit" class="btn btn-default btn-sm" value="Check Item In">
+
                 </td>
             </tr>
         @endforeach
