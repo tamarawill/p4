@@ -12,10 +12,22 @@ class UserController extends BaseController {
 
     }
 
+    /**
+     * Display login form.
+     *
+     * @return mixed
+     */
+
     public function getLogin() {
 
         return View::make('user_loginform');
     }
+
+    /**
+     * Process login form.
+     *
+     * @return mixed
+     */
 
     public function postLogin() {
         $credentials = Input::only('email', 'password');
@@ -30,16 +42,33 @@ class UserController extends BaseController {
         }
     }
 
+    /**
+     * Logs user out of the application.
+     *
+     * @return mixed
+     */
+
     public function getLogout() {
         Auth::logout();
         return Redirect::to('/');
     }
+
+    /**
+     * Display sign up form.
+     *
+     * @return mixed
+     */
 
     public function getSignup()
     {
         return View::make('user_signupform');
     }
 
+    /**
+     * Process sign up form.
+     *
+     * @return mixed
+     */
 
     public function postSignup() {
 

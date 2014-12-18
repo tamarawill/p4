@@ -12,6 +12,12 @@ class Checkout extends Eloquent {
         return $this->belongsTo('Item');
     }
 
+    /**
+     * Returns the description of the item associated with the checkout.
+     *
+     * @return string
+     */
+
     public function getItemName() {
         try {
             $item = Item::findOrFail($this->item_id);
@@ -23,6 +29,11 @@ class Checkout extends Eloquent {
         return $itemname;
     }
 
+    /**
+     * Returns the name of the user associated with the checkout.
+     *
+     * @return string
+     */
 
     public function getUserName() {
         try {
@@ -34,6 +45,18 @@ class Checkout extends Eloquent {
         }
         return $username;
     }
+
+    /**
+     * Used to determine if an item can be checked out.
+     * Returns true if any current checkout overlaps with a checkout of item $itemid
+     * would start at $start and end at $end.
+     * Designed to be compatible with
+     *
+     * @param $start start time of the desired checkout
+     * @param $end end time of the desired checkout
+     * @param $itemid itemid of the desired checkout
+     * @return bool
+     */
 
     public static function conflict($start, $end, $itemid){
         //returns conflicting Checkout
@@ -59,6 +82,13 @@ class Checkout extends Eloquent {
         return false;
 
     }
+
+    /**
+     * Returns a nicely formatted date for display on pages.
+     *
+     * @param $date_string
+     * @return bool|string
+     */
 
     public static function shortDate($date_string) {
 

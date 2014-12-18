@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * Home page
+ */
 
 Route::get('/', 'HomeController@getHomePage');
 
+/**
+ * Category, Item and Checkout Routes (RESTful)
+ *
+ */
 
 Route::resource('category','CategoryController');
 
@@ -10,7 +17,7 @@ Route::resource('item','ItemController');
 
 Route::resource('checkout','CheckoutController');
 
-//Non-RESTful user routes:
+//Non-RESTful user routes
 
 Route::get('/login', 'UserController@getLogin' );
 Route::post('/login', 'UserController@postLogin' );
@@ -18,8 +25,15 @@ Route::get('/logout', 'UserController@getLogout' );
 Route::get('/signup', 'UserController@getSignup' );
 Route::post('/signup', 'UserController@postSignup' );
 
+/**
+ * RESTful User routes
+ */
+
 Route::resource('user', 'UserController');
 
+/**
+ * Admin filter - redirects to home page if user is not an admin
+ */
 
 Route::filter('admin', function()
 {
@@ -28,40 +42,3 @@ Route::filter('admin', function()
             ->with('flash_message','Sorry, you must be an admin to access that page.');
 });
 
-
-/**
- * Testing Routes:
- */
-
-Route::get('/settestuser', function(){
-
-    $pw = Hash::make('foobar');
-    DB::update('update users set password = ? where email = ?', array( $pw, 'rhymes.with.camera@gmail.com'));
-
-});
-
-Route::get('/get-environment',function() {
-
-    echo "Environment: ".App::environment();
-
-});
-
-Route::get('/trigger-error',function() {
-
-    # Class Foobar should not exist, so this should create an error
-    $foo = new Foobar;
-
-});
-
-Route::get('mysql-test', function() {
-
-    # Print environment
-    echo 'Environment: '.App::environment().'<br>';
-
-    # Use the DB component to select all the databases
-    $results = DB::select('SHOW DATABASES;');
-
-    # If the "Pre" package is not installed, you should output using print_r instead
-    echo print_r($results);
-
-});

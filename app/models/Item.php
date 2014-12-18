@@ -12,6 +12,12 @@ class Item extends Eloquent {
         return $this->belongsTo('Category');
     }
 
+    /**
+     * Returns the name of the category.
+     *
+     * @return string
+     */
+
     public function getCategoryName() {
         try {
             $category = Category::findOrFail($this->category_id);
@@ -24,6 +30,15 @@ class Item extends Eloquent {
 
     }
 
+    /**
+     * Based on a function in "Foobooks 2014" by Susan Buck
+     * (an example project for CSCI E-15 at Harvard Extension School,
+     * Fall 2014)
+     * https://github.com/susanBuck/foobooks/blob/master/app/models/Tag.php
+     *
+     * @return array
+     */
+
     public static function getIdNamePair() {
         $items = Array();
         $collection = Item::all();
@@ -33,8 +48,11 @@ class Item extends Eloquent {
         return $items;
     }
 
+
     /**
      * Returns true if any items are associated with the category.
+     *
+     * @return bool
      */
 
     public function hasCheckouts(){

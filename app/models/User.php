@@ -30,6 +30,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     /**
      * Returns true if any items are associated with the category.
+     *
+     * @return bool
      */
 
     public function hasCheckouts(){
