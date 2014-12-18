@@ -42,7 +42,7 @@ I styled the application using Bootstrap via CDN. I added a third-party widget (
 [**JQuery:**](https://code.jquery.com/jquery-2.1.1.min.js)  
 <https://code.jquery.com/jquery-2.1.1.min.js>
 
-[**Bootstrap Javascript:**](https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js)
+[**Bootstrap Javascript:**](https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js)  
 <https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js>
 
 [**Moment.js**](https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js)  

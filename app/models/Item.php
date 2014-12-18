@@ -41,7 +41,7 @@ class Item extends Eloquent {
 
     public static function getIdNamePair() {
         $items = Array();
-        $collection = Item::all();
+        $collection = Item::all()->sortBy('description');
         foreach($collection as $item) {
             $items[$item->id] = $item->description;
         }
