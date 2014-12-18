@@ -35,6 +35,21 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
+| Missing Page Handler
+|--------------------------------------------------------------------------
+|
+| Handler for 404 errors.
+|
+ */
+
+App::missing(function($exception)
+{
+    return Redirect::to('/')
+        ->with('flash_message','I couldn\'t find that page. Here\'s the home page instead.');
+});
+
+/*
+|--------------------------------------------------------------------------
 | Application Error Handler
 |--------------------------------------------------------------------------
 |

@@ -42,3 +42,13 @@ Route::filter('admin', function()
             ->with('flash_message','Sorry, you must be an admin to access that page.');
 });
 
+/**
+ * Test route to trigger an error.
+ */
+
+Route::get('/trigger-error',function() {
+
+    # Class Foobar should not exist, so this should create an error
+    $foo = new Foobar;
+
+});
