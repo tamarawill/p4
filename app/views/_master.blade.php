@@ -95,9 +95,14 @@
 
     @yield('content')
 
-            </div>
-        </div>
-    </div>
+            </div> <!--end col-md-12-->
+        </div><!--end row-->
+    <footer>
+        @yield('footer','')
+        <p>SharedStuff &copy; 2014 Tamara Will, for <a href="http://dwa15.com" target="_blank">Dynamic Web Applications</a> at <a href="http://extension.harvard.edu" target="_blank">Harvard Extension School</a></p>
+    </footer>
+
+    </div> <!--end container-fluid-->
 
 
     <!-- JQuery Javascript -->

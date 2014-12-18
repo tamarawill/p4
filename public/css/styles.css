@@ -13,3 +13,11 @@ body {
     padding-top: 65px;
 }
 
+footer {
+    margin-top:2em;
+    padding-top:.5em;
+    border-top: solid #ccc 1px;
+    font-size:.85em;
+}
+
+

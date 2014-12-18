@@ -57,6 +57,13 @@ Edit Checkout
 
 @stop
 
+@section('footer')
+    <p>This page uses
+        <a href="http://momentjs.com/" target="_blank">Moment.js</a> and
+        <a href="https://github.com/Eonasdan/bootstrap-datetimepicker"
+        target="_blank">Eonasdan's Bootstrap Date/Time Picker</a></p>
+@stop
+
 @section('scripts')
 
     <!-- Date-time picker Javascript -->

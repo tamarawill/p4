@@ -63,7 +63,7 @@ App::missing(function($exception)
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+    Log::error($exception);
 });
 
 /*
