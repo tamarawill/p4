@@ -14,6 +14,7 @@
 
         <p><a href="/checkout/create" class="btn btn-primary">Check Out an Item</a></p>
 
+        <div class="table-responsive">
         <table class="table table-striped">
             <tr>
                 <th>
@@ -56,6 +57,7 @@
             </tr>
         @endforeach
         </table>
+        </div> <!--table-responsive-->
 
 
     @else
